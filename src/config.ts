@@ -9,4 +9,4 @@
 export const BACKEND_ADDR =
   process.env.NODE_ENV === "development"
     ? "https://blu1984.herokuapp.com"
-    : window.location.protocol + "//" + window.location.host;
+    : "https://blu1984.herokuapp.com";
