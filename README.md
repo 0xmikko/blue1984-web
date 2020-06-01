@@ -1,44 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Blue1984
+### Twitter without censorship
 
-## Available Scripts
+![1984v2 008](https://user-images.githubusercontent.com/26343374/83402867-3f7fe600-a410-11ea-9b57-af6149521fff.jpeg)
 
-In the project directory, you can run:
+This anti-censorship app for twitter was designed from scratch especially for Bluzelle hackathon.
 
-### `yarn start`
+Official site: https://blue1984.herokuapp.com/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Video demo: https://youtu.be/O3uLL3kWXAY
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Backend & mobile: https://github.com/MikaelLazarev/blu1984
 
-### `yarn test`
+## Problem
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Freedom to share your own thought is a key need for all people. Today, some social nwtworks could block and delete accounts or tweets like censors. This power limits freedom and could be used by goverments / corporations against society.
 
-### `yarn build`
+![Screenshot 2020-06-01 at 00 45 22](https://user-images.githubusercontent.com/26343374/83402860-398a0500-a410-11ea-83d8-ab2566de8fc8.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## User Story
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Blue1984 scans all accounts you are interested for. It aoutmatically copies them into decentralised Bluzelle DB. If twitter deletes or changes any tweet, it founds differences and hightlights changed / deleted tweets. There is no regitstry flow for providing additional privacy.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Screenshot 2020-06-01 at 09 39 52](https://user-images.githubusercontent.com/26343374/83402864-3d1d8c00-a410-11ea-97ce-708ca3d69721.png)
 
-### `yarn eject`
+Even if your server would be blocked by authority, you could start another one, thanks for Bluzelle all data is stored in decentralised database, so nothing would be deleted!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Screenshot 2020-06-01 at 12 49 11](https://user-images.githubusercontent.com/26343374/83402866-3e4eb900-a410-11ea-9455-8adb760cbf86.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Web and mobile version
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You could connect using web or mobile devices (works both on iOS and Android):
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img src='https://user-images.githubusercontent.com/26343374/83404016-7ce57300-a412-11ea-947b-9be3bbbf07d5.png' width='21%'/>&nbsp;&nbsp;&nbsp;<img src='https://user-images.githubusercontent.com/26343374/83404020-7f47cd00-a412-11ea-9422-ec1211715b1d.png' width='21%'/>&nbsp;&nbsp;&nbsp;<img src='https://user-images.githubusercontent.com/26343374/83404018-7eaf3680-a412-11ea-94cb-321941c54c12.png' width='21%'/>&nbsp;&nbsp;&nbsp;<img src='https://user-images.githubusercontent.com/26343374/83404017-7eaf3680-a412-11ea-90cb-fd732463cc0d.png' width='21%'/>
 
-## Learn More
+## Disclaimer
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This application is provided "as is" and "with all faults." Me as developer makes no representations or warranties of any kind concerning the safety, suitability, lack of viruses, inaccuracies, typographical errors, or other harmful components of this software. There are inherent dangers in the use of any software, and you are solely responsible for determining whether this software product is compatible with your equipment and other software installed on your equipment. You are also solely responsible for the protection of your equipment and backup of your data, and THE PROVIDER will not be liable for any damages you may suffer in connection with using, modifying, or distributing this software product.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Technical stack
+
+* Typescript
+* React / React-native for client
+* Nodejs & express for server
+* Bluzelle DB
+* Node cache
+
