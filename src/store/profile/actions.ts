@@ -32,10 +32,11 @@ export const getProfile = (): ThunkAction<void, RootState, unknown, Action<strin
 
 export const updateProfile = (
   profile: Profile,
-): Action<string> => {
+): ThunkAction<void, RootState, unknown, Action<string>> => async dispatch => {
   localStorage.setItem("profile", JSON.stringify(profile));
-  return {
-    type: 'FOF',
-  }
+  dispatch({
+    type: 'PROFILE_SUCCESS',
+    payload: profile,
+  });
 };
 
