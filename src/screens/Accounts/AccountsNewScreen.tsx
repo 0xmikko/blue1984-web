@@ -26,7 +26,7 @@ export const AccountsNewScreen: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const operationStatus = useSelector(
-    (state: RootState) => state.operations.data[hash]?.data?.status
+    (state: RootState) => state.operations.data[hash]?.data
   );
 
   const id = "";
@@ -35,7 +35,7 @@ export const AccountsNewScreen: React.FC = () => {
 
   useEffect(() => {
     if (hash !== "0") {
-      switch (operationStatus) {
+      switch (operationStatus?.status) {
         case STATUS.SUCCESS:
           history.push(`/accounts/${id}`);
           break;
@@ -43,7 +43,7 @@ export const AccountsNewScreen: React.FC = () => {
         case STATUS.FAILURE:
           setHash("0");
           setIsSubmitted(false);
-          alert("Cant submit your operation to server");
+          alert(`Cant submit your operation to server\n${operationStatus.error}` );
       }
     }
   }, [hash, operationStatus]);

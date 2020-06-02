@@ -8,5 +8,5 @@
 
 export const BACKEND_ADDR =
   process.env.NODE_ENV === "development"
-    ? "https://blu1984.herokuapp.com"
+    ? "http://localhost:4000"
     : "https://blu1984.herokuapp.com";

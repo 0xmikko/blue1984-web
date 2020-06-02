@@ -36,10 +36,11 @@ export const addNewAccount = (
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch
 ) => {
-  const action = await dispatch(addAccountAction("new", { id }, hash));
+  const savedAccounts = getAccountsFromStorage();
+  const action = await dispatch(addAccountAction("new", { id, list: savedAccounts }, hash));
   console.log(action);
 
-  const savedAccounts = getAccountsFromStorage();
+  
   let accountsList = new Set([id,
     ...savedAccounts
   ]);
