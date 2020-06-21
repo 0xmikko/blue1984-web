@@ -1,8 +1,7 @@
 /*
- * Lean tool - hypothesis testing application
- *
- * https://github.com/MikaelLazarev/lean-tool/
+ * Blue1984 - Twitter without censorship
  * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
  *
  */
 
@@ -11,6 +10,7 @@ import { Tweet } from "../../core/tweet";
 
 // @ts-ignore
 import { Tweet as TweetComponent } from "react-fake-tweet";
+import Linkify from 'react-linkify';
 import "react-fake-tweet/dist/index.css";
 
 interface TweetWidgetProps {
@@ -28,14 +28,12 @@ export const TweetWidget: React.FC<TweetWidgetProps> = ({ data }) => {
       <TweetComponent
         config={{
           user: {
-            avatar: "https://pbs.twimg.com/profile_images/633849199763656706/PLWdxCam_400x400.jpg",
+            avatar: data.user?.avatar,
             nickname: data.user?.nickname,
             name: data.user?.name,
           },
-          text: data.text,
+          text: <Linkify>{data.text}</Linkify>,
           date: data.time,
-          retweets: data.retweetCount,
-          likes: data.favoriteCount,
         }}
         style={{backgroundColor: backColor}}
       />

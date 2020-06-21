@@ -1,8 +1,8 @@
 /*
- *  Buzz Chat - Spam-free decentralized chat
+ * Blue1984 - Twitter without censorship
+ * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
  *
- *  https://github.com/MikaelLazarev/buzzchat
- *  Copyright (c) 2020. Mikhail Lazarev
  */
 
 import React, { ReactElement } from "react";

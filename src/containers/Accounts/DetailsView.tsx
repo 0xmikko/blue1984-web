@@ -1,8 +1,7 @@
 /*
- * Lean tool - hypothesis testing application
- *
- * https://github.com/MikaelLazarev/lean-tool/
+ * Blue1984 - Twitter without censorship
  * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
  *
  */
 
@@ -27,7 +26,7 @@ export const DetailsView: React.FC<AccountDetailsProps> = ({
   data,
 }: AccountDetailsProps) => {
   const history = useHistory();
-  const tabs: string[] = ["Feed", "Changed", "Deleted"];
+  const tabs: string[] = ["Feed", "Deleted tweets"];
 
   return (
     <Container className="pd-x-0 pd-lg-x-10 pd-xl-x-0 m-t-20-f pd-t-30-f">
@@ -38,7 +37,7 @@ export const DetailsView: React.FC<AccountDetailsProps> = ({
       <TabPane hash={"#changed"}>
           <InfoTab data={data} filter={(e) => e.wasChanged}/>
       </TabPane>
-      <TabPane hash={"#deleted"}>
+      <TabPane hash={"#deleted_tweets"}>
           <InfoTab data={data} filter={(e) => e.wasDeleted}/>
       </TabPane>
     </Container>

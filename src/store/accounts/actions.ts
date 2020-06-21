@@ -18,73 +18,81 @@ import { RootState } from "../index";
 import { Action } from "redux";
 import { Account } from "../../core/accounts";
 import { LIST_FAILURE, LIST_REQUEST, LIST_SUCCESS } from "../dataloader";
-import { updateStatus } from "../operations/actions";
+import {updateOperationStatusByAction, updateStatus} from "../operations/actions";
 import { STATUS } from "../../utils/status";
 import {getApiById, getFullAPIAddress} from "../../utils/api";
 import { createAction } from "redux-api-middleware";
-import * as actionTypes from "../dataloader";
 
 const addAccountAction = createDataLoaderCreateUpdateDataAction(
-  endpoint,
-  endpoint,
-  ACCOUNTS_PREFIX
+    endpoint,
+    endpoint,
+    ACCOUNTS_PREFIX
 );
 
+interface addNewAccountReturn {
+  payload: {
+    id: string;
+  };
+  error: object;
+}
+
 export const addNewAccount = (
-  id: string,
-  hash: string
+    id: string,
+    hash: string
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
-  dispatch
+    dispatch
 ) => {
-  const savedAccounts = getAccountsFromStorage();
-  const action = await dispatch(addAccountAction("new", { id, list: savedAccounts }, hash));
-  console.log(action);
 
-  
-  let accountsList = new Set([id,
-    ...savedAccounts
-  ]);
+  const action = await dispatch(addAccountAction("new", { id }, hash)) as unknown as addNewAccountReturn;
+  if (action !== undefined && !action.error) {
+    const savedAccounts = await getAccountsFromStorage();
+    let accountsList = new Set([action.payload.id,
+      ...savedAccounts
+    ]);
 
-  localStorage.setItem(
-    "accounts",
-    JSON.stringify(Array.from(accountsList.values()))
-  );
+    localStorage.setItem(
+        "accounts",
+        JSON.stringify(Array.from(accountsList.values()))
+    );
+  }
+
+  dispatch(getList(hash));
 };
 
 export const getList = (
-  hash: string
+    hash: string
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
-  dispatch
+    dispatch
 ) => {
-  const accounts = getAccountsFromStorage();
+  const accounts = await getAccountsFromStorage();
+
+  console.log("ACCCCC", accounts);
   dispatch(updateStatus(hash || "0", STATUS.UPDATING));
 
   const action = await dispatch(
-    createAction({
-      endpoint: getFullAPIAddress(endpoint + "list/"),
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({accounts}),
-      types: [
-        ACCOUNTS_PREFIX + LIST_REQUEST,
-        ACCOUNTS_PREFIX + LIST_SUCCESS,
-        ACCOUNTS_PREFIX + LIST_FAILURE,
-      ],
-    })
+      createAction({
+        endpoint: getFullAPIAddress(endpoint + "list/"),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({accounts}),
+        types: [
+          ACCOUNTS_PREFIX + LIST_REQUEST,
+          ACCOUNTS_PREFIX + LIST_SUCCESS,
+          ACCOUNTS_PREFIX + LIST_FAILURE,
+        ],
+      })
   );
 
-  if (action.error) {
-    dispatch(updateStatus(hash || "0", STATUS.FAILURE, action.payload.message));
-  } else {
-    dispatch(updateStatus(hash || "0", STATUS.SUCCESS));
-  }
+  dispatch(updateOperationStatusByAction(action, hash));
 
   return action;
 };
 
-export const getAccountsFromStorage = (): string[] => {
+export const  getAccountsFromStorage = async(): Promise<string[]> => {
   let accountsList: string[] = [];
+  //localStorage.clear();
   const savedAccountsStr = localStorage.getItem("accounts");
+
   if (savedAccountsStr !== null) {
     const savedAccounts: string[] = JSON.parse(savedAccountsStr);
     accountsList = savedAccounts;
@@ -93,13 +101,15 @@ export const getAccountsFromStorage = (): string[] => {
 };
 
 export const getDetails = createDataLoaderDetailActions(
-  endpoint + ":id/",
-  ACCOUNTS_PREFIX
+    endpoint + ":id/",
+    ACCOUNTS_PREFIX
 );
 
-export const removeAccount = (id: string, hash?: string) => {
-  const savedAccounts = getAccountsFromStorage();
+export const removeAccount = (id: string, hash?: string) : ThunkAction<void, RootState, unknown, Action<string>> => async (
+    dispatch
+) => {
+  const savedAccounts = await getAccountsFromStorage();
   const accountsList = savedAccounts.filter((e) => e != id);
   localStorage.setItem("accounts", JSON.stringify(accountsList));
-  return updateStatus(hash || "0", STATUS.SUCCESS);
+  dispatch(updateStatus(hash || "0", STATUS.SUCCESS));
 };

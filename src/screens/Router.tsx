@@ -1,3 +1,10 @@
+/*
+ * Blue1984 - Twitter without censorship
+ * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
+ *
+ */
+
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import AppBar from "../components/AppBar/AppBar";

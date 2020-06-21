@@ -1,3 +1,10 @@
+/*
+ * Blue1984 - Twitter without censorship
+ * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
+ *
+ */
+
 import {DataLoaderDetailsActions} from "./types";
 import * as actionTypes from "./index";
 import {STATUS} from "../../utils/status";

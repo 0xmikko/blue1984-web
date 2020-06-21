@@ -1,10 +1,16 @@
+/*
+ * Blue1984 - Twitter without censorship
+ * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
+ *
+ */
+
 import {Tweet} from "./tweet";
 
 export interface Account {
   id: string;
   bluID: string;
   deleted?: number;
-  changed?: number;
   cached?: number;
   lastCached?: string;
 
@@ -21,9 +27,6 @@ export interface Account {
   url: string;
   joinDate: string;
   tweetCount: number;
-  followingCount: number;
-  followerCount: number;
-  likeCount: number;
 
   tweets?: Tweet[];
 }

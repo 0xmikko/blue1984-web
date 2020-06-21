@@ -19,9 +19,9 @@ Twitter scrapper microservice: https://github.com/MikaelLazarev/blue1984-scrappe
 
 ## How to install 
 
-1. Go to /web folder
-2. Install all node modules with ```yarn``` or ```npm i```
-3. Open ./config.ts and provide server address:
+1. Clone this repository: ```git clone ```
+2. Install dependencies: ```yarn``` or ```npm i```
+3. Open ./src/config.ts and set up server address:
 ```
 export const BACKEND_ADDR = 'http://192.168.0.47:4000';
 

@@ -1,8 +1,7 @@
 /*
- * Lean tool - hypothesis testing application
- *
- * https://github.com/MikaelLazarev/lean-tool/
+ * Blue1984 - Twitter without censorship
  * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
  *
  */
 
@@ -19,6 +18,7 @@ interface TweetsFeedWidgetProps {
 }
 
 export const TweetsFeedWidget: React.FC<TweetsFeedWidgetProps> = ({ data }) => {
+
   return <>
     {data.map((elm) => <TweetWidget data={elm} key={elm.id} />) }
     </>

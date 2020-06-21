@@ -1,8 +1,7 @@
 /*
- * Lean tool - hypothesis testing application
- *
- * https://github.com/MikaelLazarev/lean-tool/
+ * Blue1984 - Twitter without censorship
  * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
  *
  */
 
@@ -42,7 +41,6 @@ export const AccountsList: React.FC<DataScreenComponentProps<Account[]>> = ({
         <td className="tx-medium text-left tx-normal" onClick={() => onPressed(h.id)}>{h.id}</td>
         <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.lastCached ? toHumanDate(h.lastCached) : '-'}</td>
         <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.cached  || '-'}</td>
-        <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.changed  || '-'}</td>
         <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.deleted  || '-'}</td>
         <td className="tx-medium text-center tx-normal"><Button
             className="btn-sm pd-x-15 btn-brand-01 btn-uppercase mg-l-10"
@@ -70,10 +68,6 @@ export const AccountsList: React.FC<DataScreenComponentProps<Account[]>> = ({
 
                   <th>Last cached</th>
                   <th>Total cached</th>
-
-
-
-                  <th>Total changed</th>
                   <th>Total deleted</th>
                   <th></th>
                 </tr>

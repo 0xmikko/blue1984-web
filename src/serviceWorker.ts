@@ -1,3 +1,10 @@
+/*
+ * Blue1984 - Twitter without censorship
+ * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
+ *
+ */
+
 // This optional code is used to register a service worker.
 // register() is not called by default.
 

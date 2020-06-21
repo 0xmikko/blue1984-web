@@ -23,28 +23,28 @@ export const getFeed = (
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
     dispatch
 ) => {
-  const accounts = getAccountsFromStorage();
-  dispatch(updateStatus(hash || "0", STATUS.UPDATING));
+    const accounts = await getAccountsFromStorage();
+    dispatch(updateStatus(hash || "0", STATUS.UPDATING));
 
-  const action = await dispatch(
-      createAction({
-        endpoint: getFullAPIAddress(endpoint),
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({accounts}),
-        types: [
-          TWEETS_PREFIX + LIST_REQUEST,
-          TWEETS_PREFIX + LIST_SUCCESS,
-          TWEETS_PREFIX + LIST_FAILURE,
-        ],
-      })
-  );
+    const action = await dispatch(
+        createAction({
+            endpoint: getFullAPIAddress(endpoint),
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({accounts}),
+            types: [
+                TWEETS_PREFIX + LIST_REQUEST,
+                TWEETS_PREFIX + LIST_SUCCESS,
+                TWEETS_PREFIX + LIST_FAILURE,
+            ],
+        })
+    );
 
-  if (action.error) {
-    dispatch(updateStatus(hash || "0", STATUS.FAILURE, action.payload.message));
-  } else {
-    dispatch(updateStatus(hash || "0", STATUS.SUCCESS));
-  }
+    if (action.error) {
+        dispatch(updateStatus(hash || "0", STATUS.FAILURE, action.payload.message));
+    } else {
+        dispatch(updateStatus(hash || "0", STATUS.SUCCESS));
+    }
 
-  return action;
+    return action;
 };

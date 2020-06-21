@@ -1,3 +1,10 @@
+/*
+ * Blue1984 - Twitter without censorship
+ * Copyright (c) 2020. Mikhail Lazarev
+ * https://github.com/MikaelLazarev/blue1984-server
+ *
+ */
+
 import React from "react";
 import { Account } from "../../core/accounts";
 import { Tweet } from "../../core/tweet";
