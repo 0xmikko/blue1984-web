@@ -5,7 +5,7 @@
 
 This anti-censorship app for twitter was designed from scratch especially for Bluzelle hackathon.
 
-Find more information, backend & mobile apps: https://github.com/MikaelLazarev/blu1984
+Find more information, backend & mobile apps: https://github.com/MikaelLazarev/blue1984-server
 
 ## Project repostories
 
