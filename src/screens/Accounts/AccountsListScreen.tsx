@@ -4,7 +4,7 @@
  * https://github.com/MikaelLazarev/blue1984-server
  *
  */
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,6 +25,7 @@ import { RootState } from "../../store";
 import actions from "../../store/actions";
 import { ToolbarButton } from "../../containers/ToolbarButton";
 import { DataScreen } from "../../components/DataLoader/DataScreen";
+import { WelcomeView } from "../../containers/Accounts/WelcomeView";
 
 export const AccountsListScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -51,11 +52,24 @@ export const AccountsListScreen: React.FC = () => {
   const onSelect = (id: string) => history.push(`/accounts/${id}`);
 
   const rightToolbar = (
-      <ToolbarButton
-          title={"+ Account"}
-          onClick={() => history.push("/accounts/new")}
-      />
+    <ToolbarButton
+      title={"+ Account"}
+      onClick={() => history.push("/accounts/new")}
+    />
   );
+
+  const content =
+    data.length === 0 ? (
+      <WelcomeView />
+    ) : (
+      <DataScreen
+        data={data}
+        status={status}
+        component={AccountsList}
+        onSelect={onSelect}
+      />
+    );
+
   return (
     <div className="content content-fixed">
       <PageHeader
@@ -63,12 +77,7 @@ export const AccountsListScreen: React.FC = () => {
         breadcrumbs={breadcrumbs}
         rightPanel={rightToolbar}
       />
-      <DataScreen
-        data={data}
-        status={status}
-        component={AccountsList}
-        onSelect={onSelect}
-      />
+      {content}
     </div>
   );
 };

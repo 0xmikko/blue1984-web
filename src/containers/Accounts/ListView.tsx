@@ -36,9 +36,10 @@ export const AccountsList: React.FC<DataScreenComponentProps<Account[]>> = ({
       dispatch(actions.accounts.removeAccount(id, hash));
 
     }
+
     return (
       <tr  key={h.id}>
-        <td className="tx-medium text-left tx-normal" onClick={() => onPressed(h.id)}>{h.id}</td>
+        <td className="tx-medium text-left tx-normal" onClick={() => onPressed(h.id)}>{h.id}{h.cached ? "" : " [Loading... it could take up to a few minutes]"}</td>
         <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.lastCached ? toHumanDate(h.lastCached) : '-'}</td>
         <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.cached  || '-'}</td>
         <td className="tx-medium text-center tx-normal" onClick={() => onPressed(h.id)}>{h.deleted  || '-'}</td>
@@ -46,6 +47,7 @@ export const AccountsList: React.FC<DataScreenComponentProps<Account[]>> = ({
             className="btn-sm pd-x-15 btn-brand-01 btn-uppercase mg-l-10"
             onClick={() => onDelete(h.id)}
             size={'sm'}
+            disabled={h.cached === undefined}
         >Delete</Button></td>
 
       </tr>

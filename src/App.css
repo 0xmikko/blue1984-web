@@ -48,10 +48,14 @@ hr {
 h1,
 h2,
 h3,
-h4,
 h5,
 h6 {
   margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  margin-top: 1em;
   margin-bottom: 0.5rem;
 }
 
@@ -108,6 +112,20 @@ p {
   border-color: #82131d;
   color: #82131d;
 }
+
+.btn:disabled, :disabled:hover {
+  font-size: 11px;
+  line-height: 1.773;
+  background-color: #5a5a5a;
+  border-color: #5a5a5a;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: .5px;
+
+}
+
+
 
 .outline {
   font-size: 11px;
