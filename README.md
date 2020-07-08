@@ -25,7 +25,6 @@ Twitter scrapper microservice: https://github.com/MikaelLazarev/blue1984-scrappe
 ```
 export const BACKEND_ADDR = 'http://192.168.0.47:4000';
 
-export const SSO_ADDR = 'http://192.168.0.47:4000';
 ```
 4. Start developer server with ```yarn start``` or ```npm run start```
 
