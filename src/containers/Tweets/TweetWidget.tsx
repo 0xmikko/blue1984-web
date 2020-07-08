@@ -10,7 +10,7 @@ import { Tweet } from "../../core/tweet";
 
 // @ts-ignore
 import { Tweet as TweetComponent } from "react-fake-tweet";
-import Linkify from 'react-linkify';
+import Linkify from "react-linkify";
 import "react-fake-tweet/dist/index.css";
 
 interface TweetWidgetProps {
@@ -18,10 +18,9 @@ interface TweetWidgetProps {
 }
 
 export const TweetWidget: React.FC<TweetWidgetProps> = ({ data }) => {
-
-    let backColor = "#FFF";
-    if (data.wasChanged) backColor = "#b3b37b";
-    if (data.wasDeleted) backColor = "#ff5858";
+  let backColor = "#FFF";
+  if (data.wasChanged) backColor = "#b3b37b";
+  if (data.wasDeleted) backColor = "#ff5858";
 
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -32,10 +31,20 @@ export const TweetWidget: React.FC<TweetWidgetProps> = ({ data }) => {
             nickname: data.user?.nickname,
             name: data.user?.name,
           },
-          text: <Linkify>{data.text}</Linkify>,
+          text: (
+            <Linkify
+              hrefDecorator={(url) => {
+                  const found = data.urls.filter(e => url.startsWith(e))
+                  console.log(found);
+                return found.length >0 ? found[0] : url;
+              }}
+            >
+              {data.text}
+            </Linkify>
+          ),
           date: data.time,
         }}
-        style={{backgroundColor: backColor}}
+        style={{ backgroundColor: backColor }}
       />
     </div>
   );

@@ -12,6 +12,7 @@ import { TweetsFeedScreen } from "./Tweets/TweetsFeedScreen";
 import { AccountsListScreen } from "./Accounts/AccountsListScreen";
 import { AccountsDetailsScreen } from "./Accounts/AccountsDetailsScreen";
 import { AccountsNewScreen } from "./Accounts/AccountsNewScreen";
+import {WelcomeView} from "../containers/Accounts/WelcomeView";
 
 export const Router: React.FC = () => {
 
@@ -39,7 +40,11 @@ export const Router: React.FC = () => {
           path="/feed"
           component={TweetsFeedScreen}
         />
-
+        <Route
+            exact
+            path="/help"
+            component={WelcomeView}
+        />
         <Route path={"*"}>
           <Redirect to={"/feed"} />
         </Route>

@@ -29,7 +29,7 @@ export const AppBar = () => {
       <div id="navbarMenu" className="navbar-menu-wrapper">
         <div className="navbar-menu-header">
           <Link to="/" className="df-logo">
-            TZ<span>factor</span>
+            Blue<span>1984</span>
           </Link>
           <a id="mainMenuClose" href="#">
             <i data-feather="x" />
@@ -38,6 +38,7 @@ export const AppBar = () => {
         <Nav className="navbar-menu" style={{justifyContent: 'center'}}>
             <AppBarElement title="Feed" to="/" key="feed" />
             <AppBarElement title="Accounts" to="/accounts" key="accounts" />
+            <AppBarElement title="Help" to="/help" key="help" />
         </Nav>
       </div>
     </Navbar>
