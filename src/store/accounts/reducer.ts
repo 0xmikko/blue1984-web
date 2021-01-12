@@ -1,12 +1,9 @@
 /*
- * Blue1984 - Twitter without censorship
- * Copyright (c) 2020. Mikhail Lazarev
- * https://github.com/MikaelLazarev/blue1984-server
- *
+ * Copyright (c) 2020. Mikael Lazarev
  */
 
-import { createDataLoaderReducer } from "../dataloader/reducer";
 import { Account } from "../../core/accounts";
 import { ACCOUNTS_PREFIX } from "./";
+import {createDataLoaderReducer} from "redux-data-connect";
 
 export default createDataLoaderReducer<Account>(ACCOUNTS_PREFIX);

@@ -1,19 +1,16 @@
 /*
- * Blue1984 - Twitter without censorship
- * Copyright (c) 2020. Mikhail Lazarev
- * https://github.com/MikaelLazarev/blue1984-server
- *
+ * Copyright (c) 2020. Mikael Lazarev
  */
 
 import { combineReducers } from "redux";
 import accounts from './accounts/reducer'
-import operations from './operations/reducer'
-import profile from './profile/reducer'
+import app from './app/reducer'
 import tweets from "./tweets/reducer";
+import {operationReducer} from 'dlt-operations'
 
 export default combineReducers({
   accounts,
-  operations,
-  profile,
+  app,
+  operations: operationReducer,
   tweets,
 });

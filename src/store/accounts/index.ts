@@ -1,9 +1,15 @@
 /*
- * Blue1984 - Twitter without censorship
- * Copyright (c) 2020. Mikhail Lazarev
- * https://github.com/MikaelLazarev/blue1984-server
- *
+ * Copyright (c) 2020. Mikael Lazarev
  */
 // HYPOTHESES
-export const ACCOUNTS_PREFIX = 'ACCOUNTS@@';
-export const endpoint = '/api/accounts/';
+import { RootState } from "../index";
+import {getFullUrl} from "redux-data-connect";
+import {BACKEND_ADDR} from "../../../config";
+
+export const ACCOUNTS_PREFIX = "ACCOUNTS@@";
+export const endpoint = getFullUrl("/api/accounts/", {host: BACKEND_ADDR});
+
+export const accountDetailsSelector = (id: string) => (state: RootState) =>
+  state.accounts.Details[id];
+
+export const accountsListSelector = (state: RootState) => state.accounts.List;
