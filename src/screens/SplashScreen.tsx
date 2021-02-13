@@ -5,31 +5,34 @@
  *
  */
 
-import React from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
-import {Loading} from '../components/Loading';
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { LoadingView } from "rn-web-components";
 
-export const SplashScreen: React.FC = () => {
+export function SplashScreen(): React.ReactElement {
   return (
     <Container
       style={{
-        width: '100vh',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-      }}>
+        width: "100vh",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
       <Row>
         <Col>
-          <Loading />
+          <LoadingView />
         </Col>
       </Row>
       <Row>
         <Col>
-          <p style={{textAlign: 'center', marginTop: '20px'}}>Loading, please wait...</p>
+          <p style={{ textAlign: "center", marginTop: "20px" }}>
+            Loading, please wait...
+          </p>
         </Col>
       </Row>
     </Container>
   );
-};
+}

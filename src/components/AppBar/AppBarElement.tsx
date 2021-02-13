@@ -1,12 +1,9 @@
 /*
- * Blue1984 - Twitter without censorship
- * Copyright (c) 2020. Mikhail Lazarev
- * https://github.com/MikaelLazarev/blue1984-server
  *
  */
 
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {StyledNavLink, StyledNavLinkItem} from './styles';
 
 interface AppBarElementProps {
   title: string;
@@ -18,10 +15,10 @@ export const AppBarElement: React.FC<AppBarElementProps> = ({
   to,
 }: AppBarElementProps) => {
   return (
-    <li className="nav-item">
-      <Link to={to} className="nav-link">
-        <i data-feather="archive" /> {title}
-      </Link>
-    </li>
+    <StyledNavLinkItem>
+      <StyledNavLink to={to}>
+       {title}
+      </StyledNavLink>
+    </StyledNavLinkItem>
   );
 };

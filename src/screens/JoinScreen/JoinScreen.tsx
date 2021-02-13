@@ -5,13 +5,10 @@
  *
  */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-import { Profile } from "../../core/profile";
-import { RootState } from "../../store";
+import { useDispatch } from "react-redux";
 import "./JoinScreen.css";
 import logo from "./1984_cover.jpg";
 import actions from "../../store/actions";
@@ -26,11 +23,7 @@ export const JoinScreen: React.FC = () => {
   const dispatch = useDispatch();
 
   const onStart = () => {
-    dispatch(
-      actions.profile.updateProfile({
-        status: "READY",
-      })
-    );
+    dispatch(actions.app.updateStatus("READY"));
   };
 
   return (

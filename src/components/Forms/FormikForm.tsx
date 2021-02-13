@@ -87,7 +87,6 @@ export function FormikForm<T, S>({
             }}
           />
         );
-
     }
   }
 
@@ -114,11 +113,11 @@ export function FormikForm<T, S>({
         onSubmit={onSubmit}
       >
         {(props: FormikProps<T>) => (
-          <Form className="form" onBlur={onChange}>
+          <Form style={{display: "flex", flexDirection: "column"}} onBlur={onChange}>
             {fieldsRendered(props)}
             <Button
               type={"submit"}
-              className="theme-button"
+              style={{marginTop: "10px"}}
               disabled={isSubmitted}
             >
               Submit

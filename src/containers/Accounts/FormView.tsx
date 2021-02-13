@@ -5,14 +5,11 @@
  *
  */
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import * as yup from "yup";
-import {
-  FormikForm,
-  FormikFormViewProps,
-} from "../../components/Forms/FormikForm";
-import { AccountCreateDTO} from "../../core/accounts";
-import { Loading } from "../../components/Loading";
+import {FormikForm, FormikFormViewProps,} from "../../components/Forms/FormikForm";
+import {AccountCreateDTO} from "../../core/accounts";
+import {LoadingView} from "rn-web-components";
 
 
 const formSchema = yup.object({
@@ -34,7 +31,7 @@ export const FormView: React.FC<FormViewProfileProps> = ({
     },
   };
 
-  if (!data) return <Loading />;
+  if (!data) return <LoadingView />;
 
   return (
     <FormikForm

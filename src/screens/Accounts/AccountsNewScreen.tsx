@@ -7,16 +7,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-
-import PageHeader from "../../components/PageHeader/PageHeader";
-import { Breadcrumb } from "../../components/PageHeader/Breadcrumb";
 import { FormView } from "../../containers/Accounts/FormView";
-
-import { STATUS } from "../../utils/status";
-import { RootState } from "../../store";
-import {Account, AccountCreateDTO} from "../../core/accounts";
+import { AccountCreateDTO } from "../../core/accounts";
 
 import actions from "../../store/actions";
+import { operationSelector } from "dlt-operations";
+import { ContainerTitle, ContainerVCenter } from "../../theme";
 
 export const AccountsNewScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,9 +20,7 @@ export const AccountsNewScreen: React.FC = () => {
   const [hash, setHash] = useState("0");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const operationStatus = useSelector(
-    (state: RootState) => state.operations.data[hash]?.data
-  );
+  const operation = useSelector(operationSelector(hash));
 
   const id = "";
 
@@ -34,25 +28,18 @@ export const AccountsNewScreen: React.FC = () => {
 
   useEffect(() => {
     if (hash !== "0") {
-      switch (operationStatus?.status) {
-        case STATUS.SUCCESS:
+      switch (operation?.status) {
+        case "STATUS.SUCCESS":
           history.push(`/accounts/${id}`);
           break;
 
-        case STATUS.FAILURE:
+        case "STATUS.FAILURE":
           setHash("0");
           setIsSubmitted(false);
-          alert(`Cant submit your operation to server\n${operationStatus.error}` );
+          alert(`Cant submit your operation to server\n${operation.error}`);
       }
     }
-  }, [hash, operationStatus]);
-
-  const breadcrumbs: Breadcrumb[] = [
-    {
-      url: "/account",
-      title: "Accounts",
-    },
-  ];
+  }, [hash, operation]);
 
   const data: AccountCreateDTO = {
     id: "",
@@ -67,9 +54,11 @@ export const AccountsNewScreen: React.FC = () => {
   };
 
   return (
-    <div className="content content-fixed">
-      <PageHeader title={"Add new account"} breadcrumbs={breadcrumbs} />
-      <FormView data={data} onSubmit={onSubmit} isSubmitted={isSubmitted} />
-    </div>
+    <ContainerVCenter>
+      <ContainerTitle>
+        <h1>Add new account</h1>
+      </ContainerTitle>
+        <FormView data={data} onSubmit={onSubmit} isSubmitted={isSubmitted} />
+    </ContainerVCenter>
   );
 };

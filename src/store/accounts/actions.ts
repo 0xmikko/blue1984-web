@@ -3,7 +3,6 @@
  */
 
 import {ACCOUNTS_PREFIX, endpoint} from './';
-import AsyncStorage from '@react-native-community/async-storage';
 import {
   createDataLoaderDetailActions,
   getFullUrl,
@@ -20,7 +19,7 @@ import {RootState} from '../index';
 import {Action} from 'redux';
 import {createAction} from 'redux-api-middleware';
 import {updateStatus} from 'dlt-operations';
-import {BACKEND_ADDR} from '../../../config';
+import {BACKEND_ADDR} from '../../config';
 
 export const addNewAccount = (
   id: string,
@@ -52,7 +51,7 @@ export const addNewAccount = (
 
     console.log('SAVED', savedAccounts);
 
-    await AsyncStorage.setItem(
+    localStorage.setItem(
       'accounts',
       JSON.stringify(Array.from(accountsList.values())),
     );
@@ -99,7 +98,7 @@ export const getList = (
 export async function getAccountsFromStorage(): Promise<string[]> {
   let accountsList: string[] = [];
   //localStorage.clear();
-  const savedAccountsStr = await AsyncStorage.getItem('accounts');
+  const savedAccountsStr = await localStorage.getItem('accounts');
 
   if (savedAccountsStr !== null) {
     const savedAccounts: string[] = JSON.parse(savedAccountsStr);
@@ -115,12 +114,13 @@ export const getDetails = createDataLoaderDetailActions(
 
 export const removeAccount = (
   id: string,
-  hash?: string,
+  hash: string = '0',
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch,
 ) => {
   const savedAccounts = await getAccountsFromStorage();
   const accountsList = savedAccounts.filter((e) => e !== id);
-  await AsyncStorage.setItem('accounts', JSON.stringify(accountsList));
+  localStorage.setItem('accounts', JSON.stringify(accountsList));
+  dispatch(getList(hash))
   dispatch(updateStatus(hash || '0', 'STATUS.SUCCESS'));
 };

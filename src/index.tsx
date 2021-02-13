@@ -16,11 +16,10 @@ import * as serviceWorker from './serviceWorker';
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
 
-import './index.css';
 import App from './App';
 import configureStore from './store';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import ThemeProvider, {FixedGlobalStyle, ThemedGlobalStyle} from "./theme";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 library.add(fas);
 
@@ -33,11 +32,15 @@ if (process.env.NODE_ENV === "production") {
 
 ReactDOM.render(
   <React.StrictMode>
+      <FixedGlobalStyle />
       <Provider store={store}>
-          <Router>
-              <App />
-          </Router>
-      </Provider>,
+          <ThemeProvider>
+              <ThemedGlobalStyle />
+              <Router>
+                  <App />
+              </Router>
+          </ThemeProvider>
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

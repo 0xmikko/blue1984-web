@@ -14,7 +14,6 @@ import { SplashScreen } from "./screens/SplashScreen";
 import actions from "./store/actions";
 import { RootState } from "./store";
 
-import "./App.css";
 import { Router } from "./screens/Router";
 import { JoinScreen } from "./screens/JoinScreen/JoinScreen";
 
@@ -22,10 +21,10 @@ const App = () => {
 
   const dispatch = useDispatch();
   useEffect(() =>{
-    dispatch(actions.profile.getProfile());
+    dispatch(actions.app.getApp());
   })
 
-  const appStatus = useSelector((state: RootState) => state.profile.status);
+  const appStatus = useSelector((state: RootState) => state.app.status);
 
   switch (appStatus) {
     case "NEW":

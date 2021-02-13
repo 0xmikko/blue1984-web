@@ -4,50 +4,29 @@
  * https://github.com/MikaelLazarev/blue1984-server
  *
  */
-import React, { useEffect, useState } from "react";
-import PageHeader from "../../components/PageHeader/PageHeader";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Breadcrumb } from "../../components/PageHeader/Breadcrumb";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Col,
-  Container,
-  Row,
-} from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { Loading } from "../../components/Loading";
-import { STATUS } from "../../utils/status";
-import { AccountsList } from "../../containers/Accounts/ListView";
-import { RootState } from "../../store";
+import {
+  RenderListHeader,
+  RenderListItem,
+} from "../../containers/Accounts/ListView";
 import actions from "../../store/actions";
 import { ToolbarButton } from "../../containers/ToolbarButton";
-import { DataScreen } from "../../components/DataLoader/DataScreen";
 import { WelcomeView } from "../../containers/Accounts/WelcomeView";
+import { accountsListSelector } from "../../store/accounts";
+import { DataListView } from "rn-web-components";
+import { ContainerTitle, ContainerVCenter } from "../../theme";
 
 export const AccountsListScreen: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [hash, setHash] = useState("0");
 
-  useEffect(() => {
-    const newHash = Date.now().toString();
-    setHash(newHash);
-    dispatch(actions.accounts.getList(newHash));
-  }, []);
+  const getList = (opHash: string) =>
+    dispatch(actions.accounts.getList(opHash));
 
-  const { data, status } = useSelector(
-    (state: RootState) => state.accounts.List
-  );
-
-  const breadcrumbs: Breadcrumb[] = [
-    {
-      url: "/accounts",
-      title: "Accounts",
-    },
-  ];
+  const data = useSelector(accountsListSelector);
 
   const onSelect = (id: string) => history.push(`/accounts/${id}`);
 
@@ -58,26 +37,23 @@ export const AccountsListScreen: React.FC = () => {
     />
   );
 
-  const content =
-    data.length === 0 ? (
-      <WelcomeView />
-    ) : (
-      <DataScreen
-        data={data}
-        status={status}
-        component={AccountsList}
-        onSelect={onSelect}
-      />
-    );
-
   return (
-    <div className="content content-fixed">
-      <PageHeader
-        title={"My accounts"}
-        breadcrumbs={breadcrumbs}
-        rightPanel={rightToolbar}
-      />
-      {content}
-    </div>
+    <ContainerVCenter>
+      <ContainerTitle>
+        <h1>Accounts</h1>
+        {rightToolbar}
+      </ContainerTitle>
+
+      <div style={{width: "100%"}}>
+        <DataListView
+          data={data}
+          getList={getList}
+          renderHeader={RenderListHeader}
+          renderItem={RenderListItem}
+          onSelect={onSelect}
+          noItemsFound={() => <WelcomeView />}
+        />
+      </div>
+    </ContainerVCenter>
   );
 };

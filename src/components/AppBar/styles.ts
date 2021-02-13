@@ -1,0 +1,77 @@
+import styled from "styled-components";
+import { Button, Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+export const StyledNavBar = styled(Navbar)`
+  height: 70px;
+  margin: 0;
+  width: 100%;
+  border: 0;
+  //border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+`;
+
+export const NavBarLogo = styled.img`
+  padding-left: 26px;
+  margin-top: 4px;
+  height: 40px;
+`;
+
+export const NavBarMenu = styled(Navbar)`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 0;
+`;
+
+export const NavBarCenter = styled(Nav)`
+  justify-content: center;
+  width: 100%;
+
+  @media only screen and (max-width: 600px) {
+    justify-content: flex-end;
+  }
+`;
+
+export const NavBarRight = styled(Navbar)`
+  padding: 0 15px 0 0;
+  margin-left: auto;
+  align-items: center;
+  justify-content: flex-end;
+  @media only screen and (max-width: 600px) {
+      display: none;
+  }
+`;
+
+export const StyledNavLinkItem = styled(Nav.Link)`
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+`;
+
+export const StyledNavLink = styled(Link)`
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  font-size: 22px;
+  font-weight: 500;
+
+  :hover {
+    text-decoration: none;
+    cursor: pointer;
+    color:black;
+  }
+  :focus {
+    outline: none;
+    text-decoration: underline;
+  }
+  :active {
+    text-decoration: none;
+  }
+`;
+
+export const StyledConnectButton = styled(Button)`
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;

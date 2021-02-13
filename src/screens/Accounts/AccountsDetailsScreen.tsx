@@ -4,88 +4,50 @@
  * https://github.com/MikaelLazarev/blue1984-server
  *
  */
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { RouteComponentProps, useHistory } from "react-router";
-
-import { RootState } from "../../store";
-
-import PageHeader from "../../components/PageHeader/PageHeader";
-import { Breadcrumb } from "../../components/PageHeader/Breadcrumb";
+import { RouteComponentProps } from "react-router";
 import { DetailsView } from "../../containers/Accounts/DetailsView";
 
 import actions from "../../store/actions";
-import { STATUS } from "../../utils/status";
-import { Loading } from "../../components/Loading";
-import { getDetailsItem } from "../../store/dataloader";
-import { DataScreen } from "../../components/DataLoader/DataScreen";
+import { accountDetailsSelector } from "../../store/accounts";
+import { DataDetailsView } from "rn-web-components";
+import { ContainerVCenter, FeedContainerTitle } from "../../theme";
+import {ShowTweetsSwitch} from "../../components/ShowTweetsSwitch";
 
 interface MatchParams {
   id: string;
-  tab?: string;
 }
 
 interface AccountDetailsScreenProps extends RouteComponentProps<MatchParams> {}
 
 export const AccountsDetailsScreen: React.FC<AccountDetailsScreenProps> = ({
   match: {
-    params: { id, tab },
+    params: { id },
   },
 }: AccountDetailsScreenProps) => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const [hash, setHash] = useState("0");
 
-  useEffect(() => {
-    const newHash = Date.now().toString();
-    setHash(newHash);
-    dispatch(actions.accounts.getDetails(id, newHash));
-  }, [id]);
+  const getDetails = (opHash: string) => {
+    console.log("GET DETAILS");
+    dispatch(actions.accounts.getDetails(id, opHash));
+  };
 
-  const dataItem = useSelector((state: RootState) =>
-    getDetailsItem(state.accounts.Details, id)
-  );
-
-  const operationStatus = useSelector(
-      (state: RootState) => state.operations.data[hash]?.data?.status
-  );
-
-  // TODO: Move status to new Dataloader component
-
-  useEffect(() => {
-    if (hash !== "0") {
-      switch (operationStatus) {
-        case STATUS.SUCCESS:
-          break;
-
-        case STATUS.FAILURE:
-          setHash("0");
-          alert("Netwrok error");
-      }
-    }
-  }, [hash, operationStatus]);
-
-  if (!dataItem || !dataItem.data || dataItem.status !== STATUS.SUCCESS) {
-    return <Loading />;
-  }
-
-  const { data, status } = dataItem;
-
-  const breadcrumbs: Breadcrumb[] = [
-    {
-      url: "/accounts",
-      title: "Accounts",
-    },
-  ];
+  const data = useSelector(accountDetailsSelector(id));
 
   return (
-    <div className="content content-fixed">
-      <PageHeader
-        title={data.id}
-        breadcrumbs={breadcrumbs}
+    <ContainerVCenter>
+      <FeedContainerTitle>
+        {" "}
+        <h1>{data?.username}</h1>
+        <ShowTweetsSwitch/>
+      </FeedContainerTitle>
+      <DataDetailsView
+        data={data}
+        getDetails={getDetails}
+        renderItem={DetailsView}
       />
-      <DataScreen data={data} status={status} component={DetailsView} />
-    </div>
+    </ContainerVCenter>
   );
 };

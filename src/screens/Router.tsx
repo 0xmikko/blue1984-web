@@ -7,48 +7,27 @@
 
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
-import AppBar from "../components/AppBar/AppBar";
-import { TweetsFeedScreen } from "./Tweets/TweetsFeedScreen";
+import { AppBar } from "../components/AppBar";
 import { AccountsListScreen } from "./Accounts/AccountsListScreen";
 import { AccountsDetailsScreen } from "./Accounts/AccountsDetailsScreen";
 import { AccountsNewScreen } from "./Accounts/AccountsNewScreen";
-import {WelcomeView} from "../containers/Accounts/WelcomeView";
+import { WelcomeView } from "../containers/Accounts/WelcomeView";
+import { FeedScreen } from "./Feed/FeedScreen";
 
-export const Router: React.FC = () => {
-
+export function Router(): React.ReactElement {
   return (
     <>
       <AppBar />
       <Switch>
-        <Route
-          exact
-          path="/accounts"
-          component={AccountsListScreen}
-        />
-        <Route
-          exact
-          path="/accounts/new"
-          component={AccountsNewScreen}
-        />
-        <Route
-          exact
-          path="/accounts/:id"
-          component={AccountsDetailsScreen}
-        />
-        <Route
-          exact
-          path="/feed"
-          component={TweetsFeedScreen}
-        />
-        <Route
-            exact
-            path="/help"
-            component={WelcomeView}
-        />
+        <Route exact path="/accounts" component={AccountsListScreen} />
+        <Route exact path="/accounts/new" component={AccountsNewScreen} />
+        <Route exact path="/accounts/:id" component={AccountsDetailsScreen} />
+        <Route exact path="/feed" component={FeedScreen} />
+        <Route exact path="/help" component={WelcomeView} />
         <Route path={"*"}>
           <Redirect to={"/feed"} />
         </Route>
       </Switch>
     </>
   );
-};
+}
