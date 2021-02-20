@@ -95,7 +95,7 @@ export function TweetCard({ data }: TweetWidgetProps): React.ReactElement {
     );
 
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div style={{ marginBottom: "20px", width: "600px" }}>
       <TweetComponent
         config={{
           user: {
