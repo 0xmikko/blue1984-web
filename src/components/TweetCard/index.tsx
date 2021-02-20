@@ -5,22 +5,14 @@
  *
  */
 
-import React, { useMemo } from "react";
-import {
-  HashTag,
-  Mention,
-  Tweet,
-  TweetText,
-  TweetToken,
-  TweetURL,
-} from "../../core/tweet";
+import React, {useMemo} from "react";
+import {HashTag, Mention, Tweet, TweetText, TweetToken, TweetURL,} from "../../core/tweet";
 
 // @ts-ignore
-import { Tweet as TweetComponent } from "react-fake-tweet";
+import {Tweet as TweetComponent} from "react-fake-tweet";
 import "react-fake-tweet/dist/index.css";
-import { TweetImg } from "./styles";
-import { TweetTokenComponent } from "../TweetPrimitives";
-import moment from "moment";
+import {TweetImg} from "./styles";
+import {TweetTokenComponent} from "../TweetPrimitives";
 
 interface TweetWidgetProps {
   data: Tweet;
